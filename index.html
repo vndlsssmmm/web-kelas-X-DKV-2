@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kelas X DKV 2 | Direktori Siswa</title>
+<style>
+:root{
+  --bg:#f2f2f7;
+  --card:rgba(255,255,255,.86);
+  --lab:#000;
+  --sec:rgba(60,60,67,.65);
+  --ter:rgba(60,60,67,.25);
+  --sep:rgba(60,60,67,.18);
+  --fill:rgba(118,118,128,.13);
+  --seg:#fff;
+  --blue:#007aff;
+  --bar:rgba(242,242,247,.88);
+  --glass-blur:14px;
+  --glass-sat:140%;
+  --fs:1;
+  --st:env(safe-area-inset-top,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#000;
+    --card:rgba(28,28,30,.82);
+    --lab:#fff;
+    --sec:rgba(235,235,245,.64);
+    --ter:rgba(235,235,245,.28);
+    --sep:rgba(84,84,88,.6);
+    --fill:rgba(118,118,128,.24);
+    --seg:#636366;
+    --blue:#0a84ff;
+    --bar:rgba(18,18,20,.85);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#000;
+  --card:rgba(28,28,30,.82);
+  --lab:#fff;
+  --sec:rgba(235,235,245,.64);
+  --ter:rgba(235,235,245,.28);
+  --sep:rgba(84,84,88,.6);
+  --fill:rgba(118,118,128,.24);
+  --seg:#636366;
+  --blue:#0a84ff;
+  --bar:rgba(18,18,20,.85);
+}
+:root.lite-mode{
+  --glass-blur:0px;
+  --glass-sat:100%;
+  --card:var(--seg);
+}
+:root.lite-mode .hd,
+:root.lite-mode .stat,
+:root.lite-mode .grp,
+:root.lite-mode .tl,
+:root.lite-mode .lc,
+:root.lite-mode .empty,
+:root.lite-mode .sticky,
+:root.lite-mode .tabs,
+:root.lite-mode .sheet{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  box-shadow:none !important;
+}
+:root.no-anim *,
+:root.no-anim *::before,
+:root.no-anim *::after{
+  animation:none !important;
+  transition:none !important;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{height:100%;background:var(--bg);font-size:calc(16px * var(--fs));scroll-padding-top:var(--st)}
+body{margin:0;min-height:100%;display:flex;flex-direction:column;color:var(--lab);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+.wall{position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--bg)}
+.wall i{position:absolute;inset:-16px;background-position:center;background-size:cover;filter:blur(var(--wb,0px));transition:opacity .25s ease}
+
+.frame{flex:1;display:flex;flex-direction:column;min-width:0}
+.app{flex:1;min-width:0;width:100%;max-width:1040px;margin:0 auto;padding-bottom:96px}
+
+/* Login */
+.login{flex:1;display:grid;place-items:center;padding:24px 18px}
+.lc{width:min(400px,100%);display:grid;gap:14px;text-align:center;background:var(--card);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep);border-radius:24px;padding:26px 20px}
+.appic{width:76px;height:76px;margin:0 auto;border-radius:20px;display:grid;place-items:center;background:linear-gradient(155deg,#5ac8fa,var(--blue));color:#fff}
+.lc h1{margin:0;font-size:1.75rem;font-weight:800;letter-spacing:-.02em}
+.lc p{margin:0;color:var(--sec);font-size:.92rem}
+.lf{background:var(--fill);border-radius:12px;text-align:left;padding:10px 14px;display:block;border:1px solid transparent}
+.lf:focus-within{border-color:var(--blue)}
+.lf small{display:block;font-size:.78rem;color:var(--sec)}
+.lf input{width:100%;border:0;background:none;outline:0;font-size:1.25rem;padding:2px 0;font-variant-numeric:tabular-nums}
+.btn{border:0;border-radius:13px;background:var(--blue);color:#fff;font-weight:700;font-size:1rem;padding:13px 16px;cursor:pointer;transition:transform .14s ease,opacity .15s ease}
+.btn:active{transform:scale(.97);opacity:.9}
+.btn.sec-btn{background:var(--fill);color:var(--lab);font-weight:600}
+.btn.sm{padding:8px 13px;font-size:.86rem;border-radius:10px}
+.lc .err{min-height:18px;color:#ff3b30;font-size:.86rem;font-weight:600}
+.shake{animation:sk .32s ease}
+@keyframes sk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Header & Stats */
+.hd{margin:12px 16px 0;padding:16px 18px;border-radius:20px;background:var(--card);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep)}
+.hd h1{margin:0;font-size:1.85rem;font-weight:800;letter-spacing:-.02em}
+.hd p{margin:3px 0 0;color:var(--sec);font-size:.9rem}
+.hd.mid{text-align:center}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 16px 4px}
+.stat{background:var(--card);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep);border-radius:16px;padding:12px}
+.stat b{display:block;font-size:1.5rem;font-weight:800;line-height:1.15}
+.stat span{font-size:.78rem;color:var(--sec);font-weight:500}
+
+/* Sticky Toolbar */
+.sticky{position:sticky;top:calc(var(--st) + 6px);z-index:5;margin:10px 16px 0;padding:12px 14px;border-radius:20px;background:var(--bar);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep);display:grid;gap:10px}
+.sf{display:flex;align-items:center;gap:8px;background:var(--fill);border-radius:11px;padding:0 10px;height:38px;color:var(--sec)}
+.sf input{flex:1;min-width:0;border:0;background:none;outline:0;font-size:.96rem;color:var(--lab)}
+.sf input::-webkit-search-cancel-button{display:none}
+.sf .clr{all:unset;cursor:pointer;width:18px;height:18px;border-radius:50%;background:var(--ter);display:grid;place-items:center}
+
+.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.pill{border:1px solid var(--sep);cursor:pointer;border-radius:999px;height:32px;padding:0 13px;background:var(--fill);font-size:.84rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.pill small{opacity:.7;font-variant-numeric:tabular-nums}
+.pill[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:transparent}
+
+.tb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--fill);border-radius:10px;padding:2px;border:1px solid var(--sep)}
+.seg button{border:0;background:none;cursor:pointer;padding:6px 14px;border-radius:8px;font-size:.82rem;font-weight:600;color:var(--sec)}
+.seg button[aria-pressed="true"]{color:var(--lab);background:var(--seg)}
+
+.sort-wrap{position:relative;display:inline-flex;align-items:center}
+.sort-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--sep);background:var(--fill);color:var(--blue);font-size:.84rem;font-weight:700;cursor:pointer}
+.sort-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:155px;padding:5px;border-radius:14px;background:var(--seg);border:1px solid var(--sep);z-index:25;display:none;gap:2px}
+.sort-menu.open{display:grid}
+.sort-opt{all:unset;display:flex;align-items:center;justify-content:space-between;padding:8px 11px;border-radius:9px;font-size:.88rem;font-weight:600;cursor:pointer}
+.sort-opt:hover{background:var(--fill)}
+.sort-opt[aria-checked="true"]{color:var(--blue)}
+
+/* List & Grid */
+main{padding:12px 0 6px}
+.grp{margin:0 16px;background:var(--card);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep);border-radius:16px;overflow:hidden}
+.lh{display:none}
+.lr{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;width:100%;padding:9px 14px;cursor:pointer;position:relative}
+.lr+.lr::before{content:"";position:absolute;top:0;left:64px;right:0;height:1px;background:var(--sep)}
+.lr:hover,.lr:active{background:var(--fill)}
+.tx{display:grid;min-width:0}
+.tx b{font-size:1rem;font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.tx small{font-size:.8rem;color:var(--sec)}
+.c{display:none}
+.ch{color:var(--ter)}
+
+.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.92rem;overflow:hidden;position:relative;user-select:none}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+.av.big{width:88px;height:88px;font-size:2rem}
+
+.gd{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px}
+.tl{all:unset;box-sizing:border-box;cursor:pointer;background:var(--card);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep);border-radius:16px;padding:13px;display:grid;gap:5px;min-width:0;align-content:start}
+.tl:hover,.tl:active{background:var(--fill)}
+.tl b{font-size:.94rem;line-height:1.25;overflow-wrap:anywhere}
+.tl small{font-size:.76rem;color:var(--sec);font-variant-numeric:tabular-nums}
+.tag{justify-self:start;font-size:.74rem;font-weight:700;color:var(--blue);background:var(--fill);border-radius:999px;padding:2px 8px;margin-top:2px}
+.q-mini{font-size:.76rem;color:var(--sec);font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.me{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--blue);color:#fff;font-size:.68rem;font-weight:700;vertical-align:2px}
+.badge-custom{display:inline-block;margin-left:5px;padding:1px 6px;border-radius:999px;background:var(--fill);color:var(--blue);font-size:.68rem;font-weight:700;vertical-align:2px}
+
+.empty{text-align:center;padding:42px 24px;margin:0 16px;border-radius:20px;background:var(--card);border:1px solid var(--sep);color:var(--sec)}
+.empty h2{margin:8px 0 4px;color:var(--lab);font-size:1.15rem}
+.foot{text-align:center;color:var(--sec);font-size:.82rem;margin:12px auto 16px}
+
+/* Profile & Account Customization */
+.sec{margin:16px 20px 6px;font-size:.76rem;font-weight:700;color:var(--sec);text-transform:uppercase;letter-spacing:.04em}
+.hero{text-align:center;padding:6px 16px 14px;display:grid;justify-items:center;gap:4px}
+.hero h2{margin:6px 0 0;font-size:1.5rem;font-weight:800;overflow-wrap:anywhere}
+.hero p{margin:0;color:var(--sec);font-size:.9rem}
+.quote-box{margin-top:6px;padding:8px 14px;border-radius:14px;background:var(--fill);font-size:.88rem;font-style:italic;max-width:92%;overflow-wrap:anywhere}
+
+.rw{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:11px 16px;position:relative}
+.rw+.rw::before{content:"";position:absolute;top:0;left:16px;right:0;height:1px;background:var(--sep)}
+.rw small{display:block;font-size:.78rem;color:var(--sec)}
+.rw b,.rw .val-txt{font-size:.98rem;font-weight:500;overflow-wrap:anywhere;word-break:break-word}
+.rw .cb{all:unset;cursor:pointer;color:var(--blue);font-size:.88rem;font-weight:700;padding:5px 8px;border-radius:8px;flex:none}
+.rw .cb:hover{background:var(--fill)}
+
+.form-box{padding:14px 16px;display:grid;gap:12px}
+.fld{display:grid;gap:5px}
+.fld label{font-size:.8rem;font-weight:700;color:var(--sec)}
+.fld input,.fld textarea,.fld select{width:100%;border:1px solid var(--sep);border-radius:11px;background:var(--fill);padding:9px 12px;font-size:.94rem;outline:0}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--blue)}
+.fld textarea{resize:vertical;min-height:68px}
+.row-btns{display:flex;gap:8px;flex-wrap:wrap}
+
+.color-swatches{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sw-dot{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
+.sw-dot[aria-pressed="true"]{border-color:var(--lab);transform:scale(1.12)}
+
+/* Settings & Accessibility */
+.pad{padding:14px 16px}
+.wps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.wp{all:unset;cursor:pointer;aspect-ratio:4/3;border-radius:12px;display:flex;align-items:flex-end;justify-content:center;background-size:cover;border:2px solid transparent}
+.wp span{font-size:.72rem;font-weight:700;padding:4px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.65)}
+.wp[aria-pressed="true"]{border-color:var(--blue)}
+
+.sr{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0}
+.sr+.sr{border-top:1px solid var(--sep)}
+.sr span{font-size:.94rem;font-weight:600}
+.sr small{display:block;font-size:.76rem;color:var(--sec);font-weight:400}
+.sw{all:unset;flex:none;width:48px;height:28px;border-radius:999px;background:var(--ter);position:relative;cursor:pointer;transition:background .2s ease}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .2s ease}
+.sw[aria-checked="true"]{background:#34c759}
+.sw[aria-checked="true"]::after{transform:translateX(20px)}
+
+.sl{display:grid;gap:6px;padding:10px 0;border-top:1px solid var(--sep);font-size:.92rem;font-weight:600}
+.sl>span{display:flex;justify-content:space-between}
+.sl b{color:var(--blue);font-variant-numeric:tabular-nums}
+.sl input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:24px;
+  background:transparent;
+  cursor:pointer;
+  margin:2px 0;
+}
+.sl input[type="range"]::-webkit-slider-runnable-track{
+  height:6px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--blue) var(--pct, 50%), var(--fill) var(--pct, 50%));
+  transition:background .15s ease;
+}
+.sl input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid var(--blue);
+  box-shadow:0 2px 6px rgba(0,0,0,.28);
+  margin-top:-7px;
+  transition:transform .18s cubic-bezier(.3,1.6,.5,1), box-shadow .18s ease, border-color .2s ease;
+}
+.sl input[type="range"]:hover::-webkit-slider-thumb{
+  transform:scale(1.12);
+}
+.sl input[type="range"]:active::-webkit-slider-thumb{
+  transform:scale(1.22);
+  box-shadow:0 3px 10px rgba(0,0,0,.35);
+}
+.sl input[type="range"]::-moz-range-track{
+  height:6px;
+  border-radius:999px;
+  background:var(--fill);
+}
+.sl input[type="range"]::-moz-range-progress{
+  height:6px;
+  border-radius:999px;
+  background:var(--blue);
+}
+.sl input[type="range"]::-moz-range-thumb{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid var(--blue);
+  box-shadow:0 2px 6px rgba(0,0,0,.28);
+  transition:transform .18s cubic-bezier(.3,1.6,.5,1), box-shadow .18s ease;
+}
+
+.seg.full{display:flex;width:100%}
+.seg.full button{flex:1}
+.out{all:unset;box-sizing:border-box;display:block;width:100%;padding:13px 16px;text-align:center;color:#ff3b30;font-size:.98rem;font-weight:700;cursor:pointer;border-top:1px solid var(--sep)}
+.out:hover{background:var(--fill)}
+
+/* Sheet Modal */
+.ov{position:fixed;inset:0;z-index:30;display:none}
+.ov.on{display:block}
+.bd{position:absolute;inset:0;background:rgba(0,0,0,.42)}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;display:flex;flex-direction:column;background:var(--bg);border-radius:20px 20px 0 0;border:1px solid var(--sep);overflow:hidden}
+.nb{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--sep);font-weight:700}
+.nb>button,.ar button{all:unset;cursor:pointer;color:var(--blue);font-size:.95rem;font-weight:700;padding:4px 6px}
+.ar{display:flex;gap:10px}
+.ar button:disabled{opacity:.25;cursor:default}
+.sc{overflow-y:auto;padding-bottom:24px}
+
+/* Bottom Nav */
+.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;gap:4px;padding:5px;width:min(360px,calc(100% - 24px));border-radius:999px;background:var(--bar);backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));border:1px solid var(--sep)}
+.tabs button{flex:1;border:0;background:none;cursor:pointer;display:grid;justify-items:center;gap:2px;padding:6px 4px;border-radius:999px;font-size:.7rem;font-weight:700;color:var(--sec)}
+.tabs button[aria-current="page"]{color:var(--blue);background:var(--fill)}
+
+.toast{position:fixed;left:50%;bottom:calc(82px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);opacity:0;z-index:50;pointer-events:none;transition:opacity .2s ease,transform .2s ease;background:rgba(28,28,30,.92);color:#fff;padding:8px 16px;border-radius:999px;font-size:.86rem;font-weight:600;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (min-width:700px){
+  .lh{display:grid;grid-template-columns:40px minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr) 16px;gap:12px;padding:9px 14px;font-size:.75rem;font-weight:700;color:var(--sec);background:var(--fill)}
+  .lr{grid-template-columns:40px minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr) 16px}
+  .tx small{display:none}
+  .c{display:block;font-size:.9rem;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .gd{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+  .sheet{left:50%;top:50%;bottom:auto;width:460px;max-width:calc(100% - 32px);max-height:calc(100% - 48px);border-radius:20px;transform:translate(-50%,-50%)}
+  .wps{grid-template-columns:repeat(8,1fr)}
+}
+
+@keyframes boxEaseIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes morphSnap{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes up{from{transform:translateY(100%)}}
+@keyframes fi{from{opacity:0}}
+@keyframes sk{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.98);filter:blur(var(--ab,6px))}}
+@keyframes bump{0%{transform:scale(.7)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes float{to{transform:translateY(-6px)}}
+@keyframes selpop{0%{transform:scale(.85)}60%{transform:scale(1.07)}}
+@keyframes down{to{transform:translateY(100%)}}
+@keyframes fo{to{opacity:0}}
+@keyframes wfade{from{opacity:.2;transform:scale(1.08)}}
+@keyframes pzo{to{opacity:0;transform:translate(-50%,-48%) scale(.96)}}
+@keyframes boxItem{from{opacity:0;transform:translateY(10px)}}
+@keyframes sheen{0%{opacity:1;background-position:150% 0}100%{opacity:0;background-position:-50% 0}}
+@keyframes boxMorph{40%{scale:1.025 .965}100%{scale:1 1}}
+@keyframes segStretch{35%{scale:1.28 .88}100%{scale:1 1}}
+@keyframes chipPop{0%{transform:scale(.85)}55%{transform:scale(1.1)}100%{transform:scale(1)}}
+@keyframes chipIn{from{opacity:0;transform:translateX(18px) scale(.9)}}
+@keyframes popIn{from{opacity:0;transform:scale(.3) rotate(-90deg)}}
+@keyframes numPop{0%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes nudge{50%{transform:rotate(45deg) translate(2px,2px)}}
+@keyframes pz{from{opacity:0;transform:translate(-50%,-48%) scale(.96)}}
+
+@keyframes tabEnter {
+  from { opacity: 0; transform: translateY(10px) scale(.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes rowEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes sheetUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes sheetPop {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(.96); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.tab:not([hidden]) {
+  animation: tabEnter .34s cubic-bezier(.22, 1, .36, 1) both;
+}
+.lr, .tl {
+  animation: rowEnter .28s cubic-bezier(.22, 1, .36, 1) both;
+  transition: transform .22s cubic-bezier(.3, 1.5, .5, 1), background-color .18s ease, border-color .18s ease;
+}
+.lr:hover { transform: translateX(2px); }
+.lr:active { transform: scale(.985); }
+.tl:hover { transform: translateY(-2px); }
+.tl:active { transform: scale(.97); }
+
+.pill, .btn, .sort-btn, .sort-opt, .sw-dot, .wp, .tabs button, .seg button {
+  transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
+}
+.pill:active, .btn:active, .sort-btn:active, .sw-dot:active, .wp:active, .tabs button:active, .seg button:active {
+  transform: scale(.94);
+}
+.pill[aria-pressed="true"], .sw-dot[aria-pressed="true"], .wp[aria-pressed="true"] {
+  animation: selpop .32s cubic-bezier(.3, 1.6, .5, 1);
+}
+.tabs button[aria-current="page"] svg {
+  animation: bump .38s cubic-bezier(.3, 1.6, .5, 1);
+}
+
+.ov.on .bd {
+  animation: fi .22s ease-out both;
+}
+.ov.on .sheet {
+  animation: sheetUp .3s cubic-bezier(.2, .9, .25, 1) both;
+}
+@media (min-width: 700px) {
+  .ov.on .sheet {
+    animation: sheetPop .26s cubic-bezier(.2, .9, .25, 1) both;
+  }
+}
+.empty, .hero, .quote-box {
+  animation: rise .35s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+
+
+
+
+@keyframes boxEaseIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes morphSnap{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes up{from{transform:translateY(100%)}}
+@keyframes fi{from{opacity:0}}
+@keyframes sk{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.98);filter:blur(var(--ab,6px))}}
+@keyframes bump{0%{transform:scale(.7)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes float{to{transform:translateY(-6px)}}
+@keyframes selpop{0%{transform:scale(.85)}60%{transform:scale(1.07)}}
+@keyframes down{to{transform:translateY(100%)}}
+@keyframes fo{to{opacity:0}}
+@keyframes wfade{from{opacity:.2;transform:scale(1.08)}}
+@keyframes pzo{to{opacity:0;transform:translate(-50%,-48%) scale(.96)}}
+@keyframes boxItem{from{opacity:0;transform:translateY(10px)}}
+@keyframes sheen{0%{opacity:1;background-position:150% 0}100%{opacity:0;background-position:-50% 0}}
+@keyframes boxMorph{40%{scale:1.025 .965}100%{scale:1 1}}
+@keyframes segStretch{35%{scale:1.28 .88}100%{scale:1 1}}
+@keyframes chipPop{0%{transform:scale(.85)}55%{transform:scale(1.1)}100%{transform:scale(1)}}
+@keyframes chipIn{from{opacity:0;transform:translateX(18px) scale(.9)}}
+@keyframes popIn{from{opacity:0;transform:scale(.3) rotate(-90deg)}}
+@keyframes numPop{0%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes nudge{50%{transform:rotate(45deg) translate(2px,2px)}}
+@keyframes pz{from{opacity:0;transform:translate(-50%,-48%) scale(.96)}}
+
+/* Animasi & transisi persis seperti versi LiquidGlass sebelum ditambah aksesibilitas */
+.tab:not([hidden]){animation:rise .36s cubic-bezier(.22,1,.36,1) both}
+.lr,.tl{transition:transform .24s cubic-bezier(.3,1.5,.5,1),background-color .2s ease,border-color .2s ease,box-shadow .24s ease}
+.lr:hover{transform:translateX(3px)}
+.lr:active{transform:scale(.98)}
+.tl:hover{transform:translateY(-3px)}
+.tl:active{transform:scale(.96)}
+.pill,.btn,.sort-btn,.sort-opt,.sw-dot,.wp,.tabs button,.seg button{transition:transform .22s cubic-bezier(.3,1.6,.5,1),background-color .2s ease,color .2s ease,border-color .2s ease,opacity .2s ease}
+.pill:active,.btn:active,.sort-btn:active,.sw-dot:active,.wp:active,.tabs button:active,.seg button:active{transform:scale(.94)}
+.pill[aria-pressed="true"],.sw-dot[aria-pressed="true"],.wp[aria-pressed="true"]{animation:selpop .32s cubic-bezier(.3,1.6,.5,1)}
+.tabs button[aria-current="page"] svg{animation:bump .38s cubic-bezier(.3,1.6,.5,1)}
+.ov.on .bd{animation:fi .22s ease-out both}
+.ov.on .sheet{animation:up .32s cubic-bezier(.2,.9,.25,1) both}
+@media (min-width:700px){
+  .ov.on .sheet{animation:pz .28s cubic-bezier(.2,.9,.25,1) both}
+}
+.empty,.hero,.quote-box{animation:rise .36s cubic-bezier(.22,1,.36,1) both}
+.toast.on{animation:rise .28s cubic-bezier(.22,1,.36,1) both}
+
+/* Saklar Kurangi Gerakan tetap bekerja jika diaktifkan */
+:root.no-anim,
+:root.no-anim *,
+:root.no-anim *::before,
+:root.no-anim *::after{
+  animation:none !important;
+  transition:none !important;
+}
+
+</style>
+</head>
+<body>
+<div class="wall" aria-hidden="true"><i id="wl"></i></div>
+<input type="file" id="wf" accept="image/*" hidden>
+<input type="file" id="pf" accept="image/*" hidden>
+
+<!-- Login -->
+<div class="login" id="lg">
+  <form class="lc" id="lc" novalidate>
+    <div class="appic" aria-hidden="true">
+      <svg width="38" height="38" viewBox="0 0 32 32" fill="currentColor"><circle cx="16" cy="11" r="6"/><path d="M4 28c0-7 5-11 12-11s12 4 12 11z"/></svg>
+    </div>
+    <h1>Kelas X DKV 2</h1>
+    <p>Masuk dengan NIS atau NISN untuk melihat direktori &amp; atur profil akunmu</p>
+    <label class="lf">
+      <small>NIS atau NISN</small>
+      <input id="nid" inputmode="numeric" autocomplete="off" placeholder="Contoh: 2615037" aria-describedby="er">
+    </label>
+    <p class="err" id="er" role="alert"></p>
+    <button class="btn" type="submit">Masuk</button>
+    <p>SMK Negeri 4 Batam · TP 2026/2027</p>
+  </form>
+</div>
+
+<!-- Main App -->
+<div class="app" id="app" hidden>
+  <!-- Tab 0: Kelas -->
+  <div class="tab" id="t0">
+    <header class="hd">
+      <h1>Kelas X DKV 2</h1>
+      <p>SMK Negeri 4 Batam · Tahun Pelajaran 2026/2027</p>
+      <p>Wali kelas: Rizka Septialis, S.Pd</p>
+    </header>
+    <section class="stats" aria-label="Ringkasan">
+      <div class="stat" style="animation-delay:0ms"><b id="sT">0</b><span>Total siswa</span></div>
+      <div class="stat" style="animation-delay:60ms"><b id="sA">0</b><span>Agama</span></div>
+      <div class="stat" style="animation-delay:120ms"><b id="sP">0</b><span>Profil diatur</span></div>
+    </section>
+    <div class="sticky">
+      <label class="sf">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="q" type="search" placeholder="Cari nama, NIS, NISN, hobi, lagu, quote..." aria-label="Cari siswa" autocomplete="off">
+        <button class="clr" id="cl" hidden aria-label="Hapus pencarian">
+          <svg width="8" height="8" viewBox="0 0 8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l6 6M7 1L1 7"/></svg>
+        </button>
+      </label>
+      <div class="chips" id="chips" role="group" aria-label="Filter agama"></div>
+      <div class="tb">
+        <div class="seg" role="group" aria-label="Tampilan">
+          <button id="vl" aria-pressed="true">Daftar</button>
+          <button id="vg" aria-pressed="false">Kartu</button>
+        </div>
+        <div class="sort-wrap" id="sw">
+          <button type="button" class="sort-btn" id="so" aria-haspopup="menu" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+            <span id="sol">Nomor</span>
+          </button>
+          <div class="sort-menu" id="sm" role="menu">
+            <button type="button" class="sort-opt" role="menuitemradio" data-so="a" aria-checked="true"><span>Nomor</span></button>
+            <button type="button" class="sort-opt" role="menuitemradio" data-so="n" aria-checked="false"><span>Nama A–Z</span></button>
+            <button type="button" class="sort-opt" role="menuitemradio" data-so="nz" aria-checked="false"><span>Nama Z–A</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main id="out"></main>
+    <p class="foot" id="cnt"></p>
+  </div>
+
+  <!-- Tab 1: Profil & Kustomisasi Akun -->
+  <div class="tab" id="t1" hidden></div>
+
+  <!-- Tab 2: Pengaturan & Aksesibilitas -->
+  <div class="tab" id="t2" hidden></div>
+</div>
+
+<!-- Bottom Bar -->
+<nav class="tabs" id="tb" aria-label="Navigasi utama" hidden>
+  <button data-t="0" aria-current="page">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c0-3.2 2.7-5 6-5s6 1.8 6 5"/><circle cx="17" cy="9" r="2.6"/><path d="M17 14c2.6 0 4.5 1.4 4.5 4"/></svg>
+    <span>Kelas</span>
+  </button>
+  <button data-t="1" aria-current="false">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.2 3-3 5.5-3s4.3.8 5.5 3"/></svg>
+    <span>Akun Saya</span>
+  </button>
+  <button data-t="2" aria-current="false">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>
+    <span>Aksesibilitas</span>
+  </button>
+</nav>
+
+<!-- Detail Sheet -->
+<div class="ov" id="ov">
+  <div class="bd" data-x></div>
+  <div class="sheet" id="sh" role="dialog" aria-modal="true" aria-label="Info siswa"></div>
+</div>
+
+<div class="toast" id="ts" role="status"></div>
+
+<script>
+const AG = ["Islam", "Kristen Protestan", "Budha"];
+const COL = ["#ff9500", "#34c759", "#5856d6", "#ff2d55", "#007aff", "#af52de", "#ff3b30", "#30b0c7"];
+const ACCENTS = [
+  { name: "Biru", hex: "#007aff" },
+  { name: "Ungu", hex: "#af52de" },
+  { name: "Pink", hex: "#ff2d55" },
+  { name: "Oranye", hex: "#ff9500" },
+  { name: "Hijau", hex: "#34c759" },
+  { name: "Toska", hex: "#30b0c7" },
+  { name: "Indigo", hex: "#5856d6" },
+  { name: "Merah", hex: "#ff3b30" }
+];
+const R = `Adara Nurfiansyah|2615037|0107458013||0
+Aditiya Alfhariz|2615038|0112079348||0
+Aisyatul Ramadaniah Samsir|2615039|0106097936||0
+Angelyn Natasya Tambunan|2615040|0105327300||1
+Avara Mohana Septevi Anwar|2615041|0106848071||0
+Artika Sari Devi|2615042|0106838256||0
+Celline|2615044|3116456052||0
+Dimas Firmansyah Ramadhan|2615046|0101843061||0
+Fatan Ruzain|2615047|0111233075||0
+Gracia Laura Ardian|2615049|0104130008||0
+Henokh Valentino Pareang|2615050|0106233419||1
+Hirma Malini|2615051|0112713444||0
+Jeck Lison|2615052|0108539845||2
+Lenni Agustina Br Sianturi|2615053|0103453567||1
+Livi Anggelia Liu|2615054|0114474002||2
+Kyara Raysa Hengkengbala|2615055|0116000280||1
+Khairani Nabila Puteri|2615056|0096907866||0
+Mohammad Al Raja Budiman|2615057|0102659405||0
+Median Arya Panji Setiawan|2615058|0109475641||0
+Mario Artha Putra Lumban Toruan|2615059|3109240722||1
+Muhammad Rafi Nasution|2615060|0106298674||0
+Muhammad Azhar Firdaus Bin Amir|2615061|0102724137||0
+Muhammad Farrel Ferdian|2615062|0102912417||0
+Nabila Dwi Febriana|2615063|0107464648||0
+Nabila Putri Rizana|2615064|0113889239||0
+Rafida Ramtia Johor|2615065|0112185977||0
+Rednia Siburian|2615066|0104660750||1
+Sevira Sudrajat|2615067|3099748867||0
+Siti Nurasyfa Nachita Putri|2615068|0106465494||0
+Syasya Dianti Husodo|2615069|3093236819||0
+Pahirah Aulia Ramadani|2615070|0103526319||0
+Yusuf Putra Abdillah Syukron|2615072|0108594055||0
+Mavi Marmara|2625112|0112622893||0
+Nabilla|2625113|0102927483||0
+Sandyka Amos Manik|2625114|0108096030||1`.split("\n").map(l => l.split("|"));
+
+const D = R.map(([n, s, k, d, c], i) => ({
+  i, n, s, k, d, c: +c, sc: AG[c], col: COL[i % COL.length]
+}));
+
+const $ = id => document.getElementById(id);
+const st = { q: "", c: -1, so: "a", v: "l", open: -1 };
+let me = -1;
+
+// Penyimpanan profil per akun (berdasarkan NIS siswa)
+let PROFILES = {};
+try {
+  PROFILES = JSON.parse(localStorage.getItem("dkv2-account-profiles-v1")) || {};
+} catch (_) { PROFILES = {}; }
+
+function saveProfiles() {
+  try {
+    localStorage.setItem("dkv2-account-profiles-v1", JSON.stringify(PROFILES));
+  } catch (_) {
+    toast("Penyimpanan penuh, coba pakai foto lebih kecil");
+  }
+}
+
+function getAcc(nis) {
+  return Object.assign({
+    avatar: "",
+    quote: "",
+    song: "",
+    hobby: "",
+    bio: "",
+    accent: ""
+  }, PROFILES[nis] || {});
+}
+
+function hasCustom(acc) {
+  return !!(acc.avatar || (acc.quote && acc.quote.trim()) || (acc.song && acc.song.trim()) || (acc.hobby && acc.hobby.trim()) || (acc.bio && acc.bio.trim()) || acc.accent);
+}
+
+const esc = s => String(s || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ini = n => n.split(" ").filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+
+function avHtml(p, big) {
+  const acc = getAcc(p.s);
+  const bg = acc.accent || p.col;
+  const cls = "av" + (big ? " big" : "");
+  if (acc.avatar) {
+    return `<div class="${cls}" style="background:${esc(bg)}"><img src="${acc.avatar}" alt="Foto ${esc(p.n)}" loading="lazy"></div>`;
+  }
+  return `<div class="${cls}" style="background:${esc(bg)}">${ini(p.n)}</div>`;
+}
+
+const nmHtml = p => {
+  const acc = getAcc(p.s);
+  return esc(p.n) +
+    (p.i === me ? `<i class="me">Saya</i>` : "") +
+    (hasCustom(acc) ? `<span class="badge-custom">Profil</span>` : "");
+};
+
+const CH = `<svg class="ch" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg>`;
+
+function lrow(p) {
+  const acc = getAcc(p.s);
+  const subParts = [`NIS ${p.s}`, p.sc];
+  if (acc.hobby) subParts.push(acc.hobby);
+  return `<button class="lr" data-i="${p.i}">${avHtml(p)}<span class="tx"><b>${nmHtml(p)}</b><small>${esc(subParts.join(" · "))}</small></span><span class="c">${esc(p.s)}</span><span class="c">${esc(p.k)}</span><span class="c">${esc(acc.hobby || p.sc)}</span>${CH}</button>`;
+}
+
+const present = [...new Set(D.map((p, idx) => p.c))].sort();
+$("sT").textContent = D.length;
+$("sA").textContent = present.length;
+
+function updateStats() {
+  const customCount = D.filter(p => hasCustom(getAcc(p.s))).length;
+  $("sP").textContent = customCount;
+}
+
+function list() {
+  const q = st.q.trim().toLowerCase();
+  const r = D.filter(p => {
+    if (st.c >= 0 && p.c !== st.c) return false;
+    if (!q) return true;
+    const acc = getAcc(p.s);
+    return (
+      p.n.toLowerCase().includes(q) ||
+      p.s.includes(q) ||
+      p.k.includes(q) ||
+      p.sc.toLowerCase().includes(q) ||
+      (acc.quote || "").toLowerCase().includes(q) ||
+      (acc.song || "").toLowerCase().includes(q) ||
+      (acc.hobby || "").toLowerCase().includes(q) ||
+      (acc.bio || "").toLowerCase().includes(q)
+    );
+  });
+  const cmp = {
+    a: (x, y) => x.i - y.i,
+    n: (x, y) => x.n.localeCompare(y.n),
+    nz: (x, y) => y.n.localeCompare(x.n)
+  }[st.so];
+  return r.sort(cmp);
+}
+
+function chips() {
+  const ch = $("chips");
+  const n = c => D.filter(p => c < 0 || p.c === c).length;
+  ch.innerHTML = [-1, ...present].map(c =>
+    `<button class="pill" data-c="${c}" aria-pressed="${st.c === c}">${c < 0 ? "Semua" : AG[c]}<small>${n(c)}</small></button>`
+  ).join("");
+}
+
+function render() {
+  updateStats();
+  const r = list(), o = $("out");
+  $("cl").hidden = !st.q;
+  $("cnt").textContent = `Menampilkan ${r.length} dari ${D.length} siswa`;
+  if (!r.length) {
+    o.innerHTML = `<div class="empty"><h2>Tidak Ada Hasil</h2><p>Tidak ada siswa yang cocok dengan “${esc(st.q.trim())}”.</p></div>`;
+    return;
+  }
+  if (st.v === "l") {
+    o.innerHTML = `<div class="grp"><div class="lh"><span></span><span>Nama</span><span>NIS</span><span>NISN</span><span>Hobi / Agama</span><span></span></div>${r.map(lrow).join("")}</div>`;
+  } else {
+    o.innerHTML = `<div class="gd">${r.map((p, idx) => {
+      const acc = getAcc(p.s);
+      return `<button class="tl" data-i="${p.i}">${avHtml(p)}<b>${nmHtml(p)}</b><small>NIS ${esc(p.s)}</small>${acc.hobby ? `<small>Hobi: ${esc(acc.hobby)}</small>` : `<small>NISN ${esc(p.k)}</small>`}${acc.quote ? `<span class="q-mini">“${esc(acc.quote)}”</span>` : ""}<span class="tag">${esc(acc.song ? "♪ " + acc.song : p.sc)}</span></button>`;
+    }).join("")}</div>`;
+  }
+}
+
+let lastFocus = null;
+function show(i) {
+  const r = list(), x = r.findIndex(p => p.i === i), p = D[i];
+  const acc = getAcc(p.s);
+  st.open = i;
+  const row = (l, v, copyable) => `<div class="rw"><div><small>${esc(l)}</small><div class="val-txt">${v || `<span style="color:var(--sec)">Belum diisi</span>`}</div></div>${copyable && v ? `<button class="cb" data-cp="${esc(v)}" data-l="${esc(l)}">Salin</button>` : ""}</div>`;
+  const ar = d => `<svg width="10" height="16" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+
+  $("sh").innerHTML = `
+    <div class="nb">
+      <button data-x>Tutup</button>
+      <span>Info Siswa</span>
+      <span class="ar">
+        <button data-n="-1" aria-label="Siswa sebelumnya" ${x <= 0 ? "disabled" : ""}>${ar("M7 1L1 7l6 6")}</button>
+        <button data-n="1" aria-label="Siswa berikutnya" ${x >= r.length - 1 ? "disabled" : ""}>${ar("M1 1l6 6-6 6")}</button>
+      </span>
+    </div>
+    <div class="sc">
+      <div class="hero">
+        ${avHtml(p, true)}
+        <h2>${nmHtml(p)}</h2>
+        <p>Kelas X DKV 2 · Absen ${p.i + 1}</p>
+        ${acc.quote ? `<div class="quote-box">“${esc(acc.quote)}”</div>` : ""}
+      </div>
+      <div class="sec">Identitas</div>
+      <div class="grp">
+        ${row("NIS", p.s, true)}
+        ${row("NISN", p.k, true)}
+        ${row("Agama", p.sc, false)}
+      </div>
+      <div class="sec">Profil &amp; Kesukaan</div>
+      <div class="grp">
+        ${row("Fav Song", acc.song ? esc(acc.song) : "", true)}
+        ${row("Hobi", acc.hobby ? esc(acc.hobby) : "", false)}
+        ${row("Tentang Aku", acc.bio ? esc(acc.bio) : "", false)}
+      </div>
+    </div>`;
+
+  if (!$("ov").classList.contains("on")) {
+    lastFocus = document.activeElement;
+    $("ov").classList.add("on");
+  }
+  $("sh").querySelector("[data-x]").focus();
+}
+
+function closeSheet() {
+  const o = $("ov");
+  if (!o.classList.contains("on")) return;
+  o.classList.remove("on");
+  st.open = -1;
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+}
+
+let toastTimer;
+function toast(msg) {
+  const t = $("ts");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("on"), 1700);
+}
+
+async function cp(v, l) {
+  try { await navigator.clipboard.writeText(v); }
+  catch (_) {
+    const a = document.createElement("textarea");
+    a.value = v;
+    document.body.appendChild(a);
+    a.select();
+    try { document.execCommand("copy"); } catch (_) {}
+    a.remove();
+  }
+  toast(l + " disalin");
+}
+
+function step(d) {
+  const r = list(), x = r.findIndex(p => p.i === st.open) + d;
+  if (r[x]) show(r[x].i);
+}
+
+// Events Tab 0
+$("q").addEventListener("input", e => { st.q = e.target.value; render(); });
+$("cl").onclick = () => { st.q = ""; $("q").value = ""; render(); $("q").focus(); };
+
+const sortLabels = { a: "Nomor", n: "Nama A–Z", nz: "Nama Z–A" };
+$("so").addEventListener("click", e => {
+  e.stopPropagation();
+  const open = $("so").getAttribute("aria-expanded") !== "true";
+  $("so").setAttribute("aria-expanded", String(open));
+  $("sm").classList.toggle("open", open);
+});
+$("sm").addEventListener("click", e => {
+  const opt = e.target.closest("[data-so]");
+  if (!opt) return;
+  st.so = opt.dataset.so;
+  $("sol").textContent = sortLabels[st.so];
+  $("sm").querySelectorAll("[data-so]").forEach(el => el.setAttribute("aria-checked", String(el.dataset.so === st.so)));
+  $("so").setAttribute("aria-expanded", "false");
+  $("sm").classList.remove("open");
+  render();
+});
+document.addEventListener("click", e => {
+  if (!e.target.closest("#sw")) {
+    $("so").setAttribute("aria-expanded", "false");
+    $("sm").classList.remove("open");
+  }
+});
+
+$("vl").onclick = () => { st.v = "l"; $("vl").setAttribute("aria-pressed", "true"); $("vg").setAttribute("aria-pressed", "false"); render(); };
+$("vg").onclick = () => { st.v = "g"; $("vg").setAttribute("aria-pressed", "true"); $("vl").setAttribute("aria-pressed", "false"); render(); };
+$("chips").addEventListener("click", e => {
+  const b = e.target.closest("[data-c]");
+  if (b) { st.c = +b.dataset.c; chips(); render(); }
+});
+$("out").addEventListener("click", e => {
+  const b = e.target.closest("[data-i]");
+  if (b) show(+b.dataset.i);
+});
+$("ov").addEventListener("click", e => {
+  if (e.target.closest("[data-x]")) return closeSheet();
+  const c = e.target.closest("[data-cp]"); if (c) return cp(c.dataset.cp, c.dataset.l);
+  const n = e.target.closest("[data-n]"); if (n && !n.disabled) step(+n.dataset.n);
+});
+document.addEventListener("keydown", e => {
+  if (!$("ov").classList.contains("on")) return;
+  if (e.key === "Escape") closeSheet();
+  if (e.key === "ArrowRight") step(1);
+  if (e.key === "ArrowLeft") step(-1);
+});
+
+// Wallpaper & Accessibility Settings
+const WP = [
+  { n: "Polos", g: "" },
+  { n: "Langit", g: "linear-gradient(160deg,#5ac8fa,#007aff 60%,#5856d6)" },
+  { n: "Senja", g: "linear-gradient(160deg,#ffcc00,#ff9500 40%,#ff2d55)" },
+  { n: "Hutan", g: "linear-gradient(160deg,#a8e063,#34c759 55%,#0b6b53)" },
+  { n: "Samudra", g: "linear-gradient(170deg,#64d2ff,#0a84ff 45%,#0b2545)" },
+  { n: "Aurora", g: "linear-gradient(160deg,#30b0c7,#5856d6 50%,#af52de)" },
+  { n: "Permen", g: "linear-gradient(160deg,#ffd1dc,#ffb3c8 50%,#c3b1ff)" },
+  { n: "Malam", g: "linear-gradient(170deg,#252547,#0b0b18 75%,#000)" }
+];
+
+let W = { t: "p", v: 0, b: 0 };
+let TH = "auto";
+let LITE = false;
+let NO_ANIM = false;
+let FS = 1;
+
+try {
+  W = JSON.parse(localStorage.getItem("dkv2-wall-lite")) || W;
+  TH = localStorage.getItem("dkv2-theme-lite") || "auto";
+  LITE = localStorage.getItem("dkv2-lite-mode") === "1";
+  NO_ANIM = localStorage.getItem("dkv2-no-anim") === "1";
+  const fsSaved = parseFloat(localStorage.getItem("dkv2-fs"));
+  if (!Number.isNaN(fsSaved) && fsSaved >= 0.85 && fsSaved <= 1.35) FS = fsSaved;
+} catch (_) {}
+
+
+let AUTO_TINT = true;
+try {
+  const savedTint = localStorage.getItem("dkv2-auto-tint");
+  if (savedTint !== null) AUTO_TINT = savedTint === "1";
+} catch (_) {}
+
+const WP_HEX = [
+  "#007aff", // Polos (default biru)
+  "#0a84ff", // Langit
+  "#ff6b1a", // Senja
+  "#28b463", // Hutan
+  "#0091ea", // Samudra
+  "#7c4dff", // Aurora
+  "#e06c9f", // Permen
+  "#4f5bd5"  // Malam
+];
+
+function extractDominantHexFromImg(imgEl) {
+  try {
+    const c = document.createElement("canvas");
+    c.width = 24;
+    c.height = 24;
+    const ctx = c.getContext("2d");
+    ctx.drawImage(imgEl, 0, 0, 24, 24);
+    const data = ctx.getImageData(0, 0, 24, 24).data;
+    let rSum = 0, gSum = 0, bSum = 0, weightSum = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i], g = data[i+1], b = data[i+2];
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      const sat = max === 0 ? 0 : (max - min) / max;
+      // Prioritaskan piksel berwarna agar UI tidak pucat
+      const w = 0.25 + sat * 2.5;
+      rSum += r * w; gSum += g * w; bSum += b * w; weightSum += w;
+    }
+    if (!weightSum) return "#007aff";
+    const rr = Math.min(255, Math.max(30, Math.round(rSum / weightSum)));
+    const gg = Math.min(255, Math.max(30, Math.round(gSum / weightSum)));
+    const bb = Math.min(255, Math.max(30, Math.round(bSum / weightSum)));
+    return "#" + [rr, gg, bb].map(v => v.toString(16).padStart(2, "0")).join("");
+  } catch (_) {
+    return "#007aff";
+  }
+}
+
+function hexToRgb(hex) {
+  const clean = (hex || "#007aff").replace("#", "");
+  const full = clean.length === 3 ? clean.split("").map(x => x + x).join("") : clean;
+  const num = parseInt(full, 16);
+  return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+}
+
+function applyDynamicUiTint(sourceHex) {
+  const root = document.documentElement;
+  const isDark = root.getAttribute("data-theme") === "dark" ||
+    (!root.hasAttribute("data-theme") && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  if (!AUTO_TINT || (W.t === "p" && (W.v || 0) === 0)) {
+    root.style.removeProperty("--blue");
+    root.style.removeProperty("--bg");
+    root.style.removeProperty("--bar");
+    return;
+  }
+
+  const baseHex = sourceHex || (W.t === "p" ? (WP_HEX[W.v] || "#007aff") : "#007aff");
+  const { r, g, b } = hexToRgb(baseHex);
+  root.style.setProperty("--blue", `rgb(${r}, ${g}, ${b})`);
+
+  if (isDark) {
+    const dr = Math.round(r * 0.14);
+    const dg = Math.round(g * 0.14);
+    const db = Math.round(b * 0.14);
+    root.style.setProperty("--bg", `rgb(${dr}, ${dg}, ${db})`);
+    root.style.setProperty("--bar", `rgba(${Math.min(255, dr + 14)}, ${Math.min(255, dg + 14)}, ${Math.min(255, db + 18)}, .86)`);
+  } else {
+    const lr = Math.round(242 + (r - 128) * 0.08);
+    const lg = Math.round(242 + (g - 128) * 0.08);
+    const lb = Math.round(247 + (b - 128) * 0.08);
+    root.style.setProperty("--bg", `rgb(${Math.min(255, Math.max(220, lr))}, ${Math.min(255, Math.max(220, lg))}, ${Math.min(255, Math.max(225, lb))})`);
+    root.style.setProperty("--bar", `rgba(${Math.min(255, Math.max(220, lr))}, ${Math.min(255, Math.max(220, lg))}, ${Math.min(255, Math.max(225, lb))}, .88)`);
+  }
+}
+
+function syncSlidersFill() {
+  document.querySelectorAll('.sl input[type="range"]').forEach(inp => {
+    const min = parseFloat(inp.min || 0);
+    const max = parseFloat(inp.max || 100);
+    const val = parseFloat(inp.value || min);
+    const pct = max === min ? 0 : ((val - min) / (max - min)) * 100;
+    inp.style.setProperty("--pct", pct.toFixed(1) + "%");
+  });
+}
+
+function applyWall() {
+  const el = $("wl");
+  if (W.t === "i" && W.v) {
+    el.style.background = `url(${W.v}) center/cover`;
+    const im = new Image();
+    im.onload = () => applyDynamicUiTint(extractDominantHexFromImg(im));
+    im.src = W.v;
+  } else {
+    el.style.background = WP[W.v] ? WP[W.v].g : "";
+    applyDynamicUiTint(WP_HEX[W.v] || "#007aff");
+  }
+  el.parentNode.style.setProperty("--wb", (W.b || 0) + "px");
+}
+
+function applyTheme() {
+  const r = document.documentElement;
+  if (TH === "auto") r.removeAttribute("data-theme");
+  else r.setAttribute("data-theme", TH);
+  applyDynamicUiTint();
+}
+
+function applyA11y() {
+  const r = document.documentElement;
+  r.classList.toggle("lite-mode", LITE);
+  r.classList.toggle("no-anim", NO_ANIM);
+  r.style.setProperty("--fs", String(FS));
+}
+
+function savePrefs() {
+  try {
+    localStorage.setItem("dkv2-wall-lite", JSON.stringify(W));
+    localStorage.setItem("dkv2-theme-lite", TH);
+    localStorage.setItem("dkv2-lite-mode", LITE ? "1" : "0");
+    localStorage.setItem("dkv2-no-anim", NO_ANIM ? "1" : "0");
+    localStorage.setItem("dkv2-fs", String(FS));
+    localStorage.setItem("dkv2-auto-tint", AUTO_TINT ? "1" : "0");
+  } catch (_) {}
+}
+
+// Tab 1: Akun Saya (Ganti Foto Profil, Quotes, Fav Song, Hobi, Bio, Warna Avatar)
+function profile() {
+  if (me < 0) return;
+  const p = D[me];
+  const acc = getAcc(p.s);
+  const row = (l, v, c) => `<div class="rw"><div><small>${esc(l)}</small><div class="val-txt">${esc(v || "-")}</div></div>${c && v ? `<button class="cb" data-cp="${esc(v)}" data-l="${esc(l)}">Salin</button>` : ""}</div>`;
+
+  $("t1").innerHTML = `
+    <header class="hd mid">
+      <div class="hero">
+        ${avHtml(p, true)}
+        <h2>${esc(p.n)}</h2>
+        <p>Kelas X DKV 2 · Absen ${p.i + 1} · NIS ${esc(p.s)}</p>
+        ${acc.quote ? `<div class="quote-box">“${esc(acc.quote)}”</div>` : ""}
+      </div>
+    </header>
+
+    <h2 class="sec">Kustomisasi Profil Akun</h2>
+    <div class="grp">
+      <form class="form-box" id="accForm">
+        <div class="fld">
+          <label>Foto Profil (Profile Picture)</label>
+          <div class="row-btns">
+            <button type="button" class="btn sec-btn sm" id="pickAv">Ganti Foto</button>
+            ${acc.avatar ? `<button type="button" class="btn sec-btn sm" id="rmAv">Hapus Foto</button>` : ""}
+          </div>
+        </div>
+
+        <div class="fld">
+          <label>Warna Latar Avatar / Aksen</label>
+          <div class="color-swatches">
+            <button type="button" class="sw-dot" data-col="" aria-label="Warna bawaan" aria-pressed="${!acc.accent}" style="background:${p.col}"></button>
+            ${ACCENTS.map(a => `<button type="button" class="sw-dot" data-col="${a.hex}" aria-label="Warna ${a.name}" aria-pressed="${acc.accent === a.hex}" style="background:${a.hex}"></button>`).join("")}
+          </div>
+        </div>
+
+        <div class="fld">
+          <label for="fQuote">Quotes</label>
+          <textarea id="fQuote" maxlength="180" placeholder="Tulis quotes favoritmu...">${esc(acc.quote)}</textarea>
+        </div>
+
+        <div class="fld">
+          <label for="fSong">Fav Song (Lagu Favorit)</label>
+          <input id="fSong" type="text" maxlength="100" value="${esc(acc.song)}" placeholder="Contoh: Nadhif Basalamah - penjaga hati">
+        </div>
+
+        <div class="fld">
+          <label for="fHobby">Hobi</label>
+          <input id="fHobby" type="text" maxlength="100" value="${esc(acc.hobby)}" placeholder="Contoh: Menggambar digital, fotografi, gaming">
+        </div>
+
+        <div class="fld">
+          <label for="fBio">Catatan / Bio Singkat</label>
+          <input id="fBio" type="text" maxlength="140" value="${esc(acc.bio)}" placeholder="Tulis info tambahan tentang dirimu...">
+        </div>
+
+        <div class="row-btns">
+          <button type="submit" class="btn sm">Simpan Profil</button>
+          <button type="button" class="btn sec-btn sm" id="resetAcc">Reset Profil</button>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="sec">Data Resmi Siswa</h2>
+    <div class="grp">
+      ${row("NIS", p.s, true)}
+      ${row("NISN", p.k, true)}
+      ${row("Agama", p.sc, false)}
+      ${row("Wali Kelas", "Rizka Septialis, S.Pd", false)}
+    </div>`;
+}
+
+// Tab 2: Aksesibilitas & Tema
+function setup() {
+  if (me < 0) return;
+  $("t2").innerHTML = `
+    <header class="hd">
+      <h1>Aksesibilitas &amp; Tema</h1>
+      <p>Sesuaikan tampilan, performa, dan kenyamanan baca</p>
+    </header>
+
+    <h2 class="sec">Aksesibilitas &amp; Performa</h2>
+    <div class="grp pad">
+      <div class="sr">
+        <div>
+          <span>Mode Ringan (Hemat Performa)</span>
+          <small>Matikan efek blur kaca agar lebih enteng &amp; tidak berat</small>
+        </div>
+        <button class="sw" id="swLite" role="switch" aria-checked="${LITE}" aria-label="Mode Ringan"></button>
+      </div>
+      <div class="sr">
+        <div>
+          <span>Kurangi Gerakan / Animasi</span>
+          <small>Menonaktifkan transisi agar nyaman di mata</small>
+        </div>
+        <button class="sw" id="swAnim" role="switch" aria-checked="${NO_ANIM}" aria-label="Kurangi Gerakan"></button>
+      </div>
+      <div class="sr">
+        <div>
+          <span>Warna UI Ikuti Background</span>
+          <small>Warna aksen &amp; nuansa UI menyesuaikan wallpaper aktif</small>
+        </div>
+        <button class="sw" id="swTint" role="switch" aria-checked="${AUTO_TINT}" aria-label="Warna UI Ikuti Background"></button>
+      </div>
+      <label class="sl">
+        <span>Ukuran Teks<b id="fsVal">${Math.round(FS * 100)}%</b></span>
+        <input type="range" id="fsRange" min="85" max="130" step="5" value="${Math.round(FS * 100)}">
+      </label>
+    </div>
+
+    <h2 class="sec">Mode Terang / Gelap</h2>
+    <div class="grp pad">
+      <div class="seg full" role="group" aria-label="Mode tampilan">
+        ${[["auto", "Otomatis"], ["light", "Terang"], ["dark", "Gelap"]].map(([k, l]) =>
+          `<button data-th="${k}" aria-pressed="${TH === k}">${l}</button>`
+        ).join("")}
+      </div>
+    </div>
+
+    <h2 class="sec">Wallpaper</h2>
+    <div class="grp pad">
+      <div class="wps">
+        ${WP.map((w, i) => `<button class="wp" data-w="${i}" aria-pressed="${W.t === "p" && W.v === i}" style="background:${w.g || "var(--fill)"}"><span>${esc(w.n)}</span></button>`).join("")}
+      </div>
+      <div class="row-btns" style="margin-top:10px">
+        <button type="button" class="btn sec-btn sm" id="pickWall">Foto Wallpaper</button>
+        <button type="button" class="btn sec-btn sm" id="resetWall">Reset Wallpaper</button>
+      </div>
+      <label class="sl">
+        <span>Buram Wallpaper<b id="wbVal">${W.b || 0}px</b></span>
+        <input type="range" id="wbRange" min="0" max="16" value="${W.b || 0}">
+      </label>
+    </div>
+
+    <h2 class="sec">Akun</h2>
+    <div class="grp">
+      <div class="rw"><div><small>Masuk sebagai</small><b>${esc(D[me].n)}</b></div></div>
+      <button class="out" id="lo">Keluar dari Akun</button>
+    </div>`;
+  syncSlidersFill();
+}
+
+// Kompres gambar ke ukuran kecil agar ringan & tidak memenuhi localStorage
+function compressImage(file, maxSize, quality, cb) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(img.width * scale));
+      canvas.height = Math.max(1, Math.round(img.height * scale));
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      cb(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = () => toast("Gambar tidak bisa dibuka");
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+let tempAccent = "";
+$("t1").addEventListener("click", e => {
+  const c = e.target.closest("[data-cp]");
+  if (c) return cp(c.dataset.cp, c.dataset.l);
+
+  if (e.target.closest("#pickAv")) {
+    const acc = getAcc(D[me].s);
+    tempAccent = acc.accent || "";
+    return $("pf").click();
+  }
+
+  if (e.target.closest("#rmAv")) {
+    const nis = D[me].s;
+    const acc = getAcc(nis);
+    acc.avatar = "";
+    PROFILES[nis] = acc;
+    saveProfiles();
+    profile();
+    render();
+    toast("Foto profil dihapus");
+    return;
+  }
+
+  const dot = e.target.closest(".sw-dot");
+  if (dot) {
+    const nis = D[me].s;
+    const acc = getAcc(nis);
+    acc.accent = dot.dataset.col || "";
+    PROFILES[nis] = acc;
+    saveProfiles();
+    profile();
+    render();
+    toast("Warna avatar diperbarui");
+    return;
+  }
+
+  if (e.target.closest("#resetAcc")) {
+    const nis = D[me].s;
+    delete PROFILES[nis];
+    saveProfiles();
+    profile();
+    render();
+    toast("Profil akun direset");
+  }
+});
+
+$("t1").addEventListener("submit", e => {
+  if (e.target.id !== "accForm") return;
+  e.preventDefault();
+  const nis = D[me].s;
+  const prev = getAcc(nis);
+  PROFILES[nis] = {
+    avatar: prev.avatar || "",
+    accent: prev.accent || "",
+    quote: ($("fQuote").value || "").trim(),
+    song: ($("fSong").value || "").trim(),
+    hobby: ($("fHobby").value || "").trim(),
+    bio: ($("fBio").value || "").trim()
+  };
+  saveProfiles();
+  profile();
+  render();
+  toast("Profil akun tersimpan");
+});
+
+$("pf").addEventListener("change", e => {
+  const f = e.target.files[0];
+  e.target.value = "";
+  if (!f || me < 0) return;
+  compressImage(f, 240, 0.78, dataUrl => {
+    const nis = D[me].s;
+    const acc = getAcc(nis);
+    acc.avatar = dataUrl;
+    PROFILES[nis] = acc;
+    saveProfiles();
+    profile();
+    render();
+    toast("Foto profil diganti");
+  });
+});
+
+$("t2").addEventListener("click", e => {
+  if (e.target.closest("#swLite")) {
+    LITE = !LITE;
+    applyA11y();
+    savePrefs();
+    setup();
+    toast(LITE ? "Mode Ringan aktif" : "Mode Kaca aktif");
+    return;
+  }
+  if (e.target.closest("#swAnim")) {
+    NO_ANIM = !NO_ANIM;
+    applyA11y();
+    savePrefs();
+    setup();
+    toast(NO_ANIM ? "Animasi dimatikan" : "Animasi diaktifkan");
+    return;
+  }
+  if (e.target.closest("#swTint")) {
+    AUTO_TINT = !AUTO_TINT;
+    applyDynamicUiTint();
+    savePrefs();
+    setup();
+    toast(AUTO_TINT ? "Warna UI ikut background" : "Warna UI standar");
+    return;
+  }
+  const thBtn = e.target.closest("[data-th]");
+  if (thBtn) {
+    TH = thBtn.dataset.th;
+    applyTheme();
+    savePrefs();
+    setup();
+    return;
+  }
+  const wpBtn = e.target.closest("[data-w]");
+  if (wpBtn) {
+    W = { t: "p", v: +wpBtn.dataset.w, b: W.b || 0 };
+    applyWall();
+    savePrefs();
+    setup();
+    return;
+  }
+  if (e.target.closest("#pickWall")) return $("wf").click();
+  if (e.target.closest("#resetWall")) {
+    W = { t: "p", v: 0, b: 0 };
+    applyWall();
+    savePrefs();
+    setup();
+    toast("Wallpaper direset");
+    return;
+  }
+  if (e.target.closest("#lo")) logout();
+});
+
+$("t2").addEventListener("input", e => {
+  if (e.target.id === "fsRange") {
+    FS = (+e.target.value) / 100;
+    $("fsVal").textContent = `${e.target.value}%`;
+    syncSlidersFill();
+    applyA11y();
+    savePrefs();
+  }
+  if (e.target.id === "wbRange") {
+    W.b = +e.target.value;
+    $("wbVal").textContent = `${W.b}px`;
+    syncSlidersFill();
+    applyWall();
+    savePrefs();
+  }
+});
+
+$("wf").addEventListener("change", e => {
+  const f = e.target.files[0];
+  e.target.value = "";
+  if (!f) return;
+  compressImage(f, 800, 0.75, dataUrl => {
+    W = { t: "i", v: dataUrl, b: W.b || 0 };
+    applyWall();
+    savePrefs();
+    setup();
+    toast("Wallpaper diganti");
+  });
+});
+
+// Tabs & Login
+function tab(n) {
+  ["t0", "t1", "t2"].forEach((id, i) => { $(id).hidden = i !== n; });
+  document.querySelectorAll("#tb button").forEach((b, i) => b.setAttribute("aria-current", i === n ? "page" : "false"));
+  if (n === 1) profile();
+  if (n === 2) setup();
+  const activeTab = $(`t${n}`);
+  if (activeTab && !NO_ANIM) { activeTab.style.animation = 'none'; void activeTab.offsetWidth; activeTab.style.animation = ''; }
+  window.scrollTo(0, 0);
+}
+
+$("tb").addEventListener("click", e => {
+  const b = e.target.closest("[data-t]");
+  if (b) tab(+b.dataset.t);
+});
+
+const nz = v => v.replace(/\D/g, "").replace(/^0+/, "");
+
+function enter(i, quiet) {
+  me = i;
+  $("lg").hidden = true;
+  $("app").hidden = false;
+  $("tb").hidden = false;
+  profile();
+  setup();
+  chips();
+  render();
+  tab(0);
+  if (!quiet) toast("Halo, " + D[i].n.split(" ")[0]);
+}
+
+function logout() {
+  me = -1;
+  try { localStorage.removeItem("dkv2-nis-lite"); } catch (_) {}
+  closeSheet();
+  st.q = ""; st.c = -1;
+  $("q").value = "";
+  $("lg").hidden = false;
+  $("app").hidden = true;
+  $("tb").hidden = true;
+  $("nid").focus();
+}
+
+$("lc").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = nz($("nid").value);
+  const p = v && D.find(x => nz(x.s) === v || nz(x.k) === v);
+  if (!p) {
+    $("er").textContent = v ? "NIS atau NISN tidak ditemukan di kelas X DKV 2." : "Masukkan NIS atau NISN terlebih dahulu.";
+    const f = $("lc");
+    f.classList.remove("shake");
+    void f.offsetWidth;
+    f.classList.add("shake");
+    return;
+  }
+  $("er").textContent = "";
+  $("nid").value = "";
+  try { localStorage.setItem("dkv2-nis-lite", p.s); } catch (_) {}
+  enter(p.i);
+});
+
+$("nid").addEventListener("input", () => { $("er").textContent = ""; });
+
+// Init
+applyTheme();
+applyA11y();
+applyWall();
+chips();
+render();
+try {
+  const savedNis = localStorage.getItem("dkv2-nis-lite");
+  const found = savedNis && D.find(x => x.s === savedNis);
+  if (found) enter(found.i, true);
+} catch (_) {}
+</script>
+</body>
+</html>
